@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.10'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.mindhub'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+bootRun {
+    sourceResources sourceSets.main
+}
+
+bootJar {
+    archiveFileName = 'homebanking.jar'
+}
+
+compileJava {
+    options.annotationProcessorPath = configurations.compileClasspath
+}
+
+dependencies {
+    implementation 'io.github.flashvayne:chatgpt-spring-boot-starter:1.0.4'
+    implementation 'com.google.code.gson:gson'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.jetbrains:annotations:24.0.1'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    //Formato XML
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    implementation 'org.json:json:20230227'
+
+    //Lombok para anotar getter y setter
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.26'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+    //runtimeOnly 'com.h2database:h2', ya no se utilizara la BD h2
+    implementation 'org.postgresql:postgresql:42.5.4'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    //Encriptación
+    implementation 'commons-codec:commons-codec:1.13'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
